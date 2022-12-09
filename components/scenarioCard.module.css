@@ -1,0 +1,28 @@
+.card {
+  backdrop-filter: blur(1rem) saturate(180%);
+  -webkit-backdrop-filter: blur(1rem) saturate(180%);
+  background-color: rgba(63, 58, 58, 0.25);
+  border-radius: 12px;
+  border: 1px solid rgba(209, 213, 219, 0.3);
+
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.titleText {
+  font-weight: 500;
+  font-size: 1.25rem;
+  margin-top: 1rem;
+}
+
+.captionText {
+  margin: 0.5rem;
+  font-size: 1rem;
+}
+
+.borderRadius12 {
+  border-radius: 0.75rem;
+}

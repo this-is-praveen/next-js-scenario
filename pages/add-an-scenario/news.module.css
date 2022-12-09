@@ -1,0 +1,62 @@
+.inputElement {
+  display: inline-block;
+  box-sizing: content-box;
+  padding: 10px 20px;
+  border: 1px solid #b7b7b7;
+  border-radius: 3px;
+  text-overflow: clip;
+  box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.2) inset;
+  transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  width: 20rem;
+  margin-right: 5rem;
+}
+
+.inputLabel {
+  font-weight: 500;
+  margin-right: 0.5rem;
+  width: 10rem;
+  text-align: end;
+}
+
+.dflex {
+  display: flex;
+  position: relative;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.errorDiv {
+  color: rgb(223, 57, 57);
+  align-self: center;
+  display: flex;
+  position: absolute;
+  right: -250px;
+  width: 300px;
+}
+
+.flexContentEnd {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.submitButton {
+  color: #fff;
+  text-shadow: 1px 1px 0px #7cacde;
+  box-shadow: 1px 1px 1px #bee2f9;
+  padding: 10px 25px;
+  border-radius: 10px;
+  border: 2px solid #3866a3;
+  background: #63b8ee;
+  background: linear-gradient(to top, #63b8ee, #468ccf);
+}
+.submitButton:hover {
+  background: #468ccf;
+  background: linear-gradient(to top, #468ccf, #63b8ee);
+}
+
+.formWrapper {
+  display: flex;
+  justify-content: center;
+  width: -webkit-fill-available;
+  align-items: center;
+}
