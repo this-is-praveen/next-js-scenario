@@ -1,19 +1,37 @@
+import { GetStaticProps } from "next";
+import CONNECT_MONGO from "../components/mongo";
 import ScenarioCard from "../components/scenarioCard";
 
-const HomePage = () => {
-  console.count("Home");
+const HomePage = (props: any) => {
+  const { sceanarios = [] } = props;
   return (
     <>
-      <h1>Home Page</h1>
-      <ScenarioCard
-        title="Test 1"
-        caption="Hello this is caption"
-        imageSrc={
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Ocean_and_mountain.jpg/1024px-Ocean_and_mountain.jpg"
-        }
-      />
+      {sceanarios.map((scenario: any) => (
+        <ScenarioCard
+          key={scenario._id}
+          title={scenario.title}
+          caption={scenario.caption}
+          imageSrc={scenario.imageSrc}
+        />
+      ))}
     </>
   );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  const { scenarioCollection, closeDB } = await CONNECT_MONGO();
+
+  const sceanarios = await scenarioCollection.find().toArray();
+  closeDB();
+
+  return {
+    props: {
+      sceanarios: sceanarios.map((scenario) => ({
+        ...scenario,
+        ["_id"]: scenario._id.toString(),
+      })),
+    },
+  };
 };
 
 export default HomePage;

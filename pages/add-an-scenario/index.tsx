@@ -9,6 +9,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import classes from "./news.module.css";
 
 import { MongoClient, ServerApiVersion } from "mongodb";
+import CONNECT_MONGO from "../../components/mongo";
 
 type ValueType = {
   title: string;
@@ -50,10 +51,14 @@ const AddAnScenario = (props: any) => {
   const onSubmit = async (values: ValueType, formikProps: any) => {
     const { setSubmitting, resetForm } = formikProps;
     setSubmitting(true);
-    // setTimeout(() => {
-    //   console.log("resolved timeout at onSubmit");
-    // }, 5000);
-    // resetForm();
+    const response = await fetch("/api/add-an-scenario", {
+      method: "POST",
+      body: JSON.stringify(values),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log("response :>> ", await response.json());
     setSubmitting(false);
   };
   return (
@@ -124,46 +129,6 @@ const AddAnScenario = (props: any) => {
       </Formik>
     </div>
   );
-};
-
-// export const getServerSideProps: GetServerSideProps = async (ctx) => {
-//   const promise = new Promise((resolve) => {
-//     setTimeout(() => {
-//       resolve("Lorem from SSR");
-//     }, 1);
-//   });
-//   const data = await promise.then((data) => data);
-
-//   return {
-//     props: {
-//       dummyData: data,
-//     },
-//   };
-// };
-
-const CONNECT_MONGO = async () => {
-  const uri = `mongodb+srv://praveen:tWrYq7QSaC3Ud4@cluster0.orewp.mongodb.net/?retryWrites=true&w=majority`;
-  const client = new MongoClient(uri);
-
-  const clientPromise = client.connect();
-  console.log("CLient Connected !!");
-
-  return clientPromise;
-};
-
-export const getStaticProps: GetStaticProps = async (ctx) => {
-  // const { data } = await  // your fetch function here
-  const clientPromise = CONNECT_MONGO();
-
-  const clientResponse = await clientPromise;
-  const collection = clientResponse.db("NextJS_scenario");
-  console.log("collection >>>>>", collection);
-
-  return {
-    props: {
-      dummyData: "Lorem Ipsum",
-    },
-  };
 };
 
 export default AddAnScenario;
