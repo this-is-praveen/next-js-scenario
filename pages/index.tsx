@@ -19,8 +19,15 @@ const HomePage = (props: any) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { scenarioCollection, closeDB } = await CONNECT_MONGO();
+  const mongoProps = await CONNECT_MONGO();
+  if (!mongoProps)
+    return {
+      props: {
+        sceanarios: [],
+      },
+    };
 
+  const { scenarioCollection, closeDB } = mongoProps;
   const sceanarios = await scenarioCollection.find().toArray();
   closeDB();
 

@@ -2,7 +2,10 @@ import CONNECT_MONGO from "../../components/mongo";
 
 const handler = async (req: any, res: any) => {
   if (req.method === "POST") {
-    const { scenarioCollection, closeDB } = await CONNECT_MONGO();
+    const mongoProps = await CONNECT_MONGO();
+    if (!mongoProps) return;
+
+    const { scenarioCollection, closeDB } = mongoProps;
     const payload = req.body;
     if (!payload) {
       closeDB();
