@@ -50,7 +50,7 @@ const AddAnScenario = (props: any) => {
   const onSubmit = async (values: ValueType, formikProps: any) => {
     const { setSubmitting, resetForm } = formikProps;
     setSubmitting(true);
-    const response = await fetch("/api/add-an-scenario", {
+    const response = await fetch("/api/addAnScenario", {
       method: "POST",
       body: JSON.stringify(values),
       headers: {
