@@ -3,13 +3,10 @@
 //- The data comes from a headless CMS.
 //- The data can be publicly cached (not user-specific).
 //- The page must be pre-rendered (for SEO) and be very fast — getStaticProps generates HTML and JSON files, both of which can be cached by a CDN for performance.
-import { GetStaticProps } from "next";
-import * as Yup from "yup";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import classes from "./news.module.css";
-
-import { MongoClient, ServerApiVersion } from "mongodb";
-import CONNECT_MONGO from "../../components/mongo";
+import { useRouter } from "next/router";
+import * as Yup from "yup";
+import classes from "./add-an-scenario.module.css";
 
 type ValueType = {
   title: string;
@@ -30,6 +27,8 @@ const webUrlRegex =
   /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/;
 
 const AddAnScenario = (props: any) => {
+  const router = useRouter();
+
   const schema = Yup.object().shape({
     title: Yup.string()
       .required(`${fieldName["title"]} is Required`)
@@ -58,7 +57,9 @@ const AddAnScenario = (props: any) => {
         "Content-Type": "application/json",
       },
     });
-    console.log("response :>> ", await response.json());
+    if (response.status === 201) {
+      router.push("/");
+    }
     setSubmitting(false);
   };
   return (
@@ -84,7 +85,6 @@ const AddAnScenario = (props: any) => {
             errors,
             isSubmitting,
           } = formikProps;
-          console.log("values ", values);
 
           const InputField = ({ for: field }: { for: ValueKeys }) => (
             <div className={classes["dflex"]}>

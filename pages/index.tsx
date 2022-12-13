@@ -9,6 +9,7 @@ const HomePage = (props: any) => {
       {sceanarios.map((scenario: any) => (
         <ScenarioCard
           key={scenario._id}
+          id={scenario._id}
           title={scenario.title}
           caption={scenario.caption}
           imageSrc={scenario.imageSrc}

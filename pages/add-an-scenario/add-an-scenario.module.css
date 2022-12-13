@@ -41,17 +41,17 @@
 
 .submitButton {
   color: #fff;
-  text-shadow: 1px 1px 0px #7cacde;
-  box-shadow: 1px 1px 1px #bee2f9;
+  text-shadow: 1px 1px 0px #86672d;
+  box-shadow: 1px 1px 1px #c9aa47;
   padding: 10px 25px;
   border-radius: 10px;
-  border: 2px solid #3866a3;
-  background: #63b8ee;
-  background: linear-gradient(to top, #63b8ee, #468ccf);
+  border: 2px solid #86672d;
+  background: #94643d;
+  background: linear-gradient(to top, #94643d, #a06e36);
 }
 .submitButton:hover {
-  background: #468ccf;
-  background: linear-gradient(to top, #468ccf, #63b8ee);
+  background: #a06e36;
+  background: linear-gradient(to top, #a06e36, #94643d);
 }
 
 .formWrapper {
