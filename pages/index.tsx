@@ -38,6 +38,7 @@ export const getStaticProps: GetStaticProps = async () => {
         ["_id"]: scenario._id.toString(),
       })),
     },
+    revalidate: 1,
   };
 };
 
