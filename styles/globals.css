@@ -11,6 +11,8 @@ body {
 
 .blurBy4px {
   filter: blur(4px);
+  transition: filter 0.5s ease-out;
+  pointer-events: none;
 }
 
 a {

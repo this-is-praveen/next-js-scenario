@@ -60,3 +60,36 @@
   width: -webkit-fill-available;
   align-items: center;
 }
+
+@media only screen and (max-width: 768px) {
+  .formWrapper {
+    flex-direction: column;
+    margin: 2rem auto;
+  }
+  .formWrapper form {
+    width: 100%;
+  }
+  .inputElement {
+    width: -webkit-fill-available;
+    margin: auto;
+  }
+  .dflex {
+    flex-direction: column;
+    row-gap: 1rem;
+    width: unset;
+  }
+  .inputLabel {
+    text-align: start;
+    width: 100%;
+    margin-right: unset;
+  }
+  .errorDiv {
+    position: relative;
+    width: fit-content;
+    inset: unset;
+    align-self: end;
+  }
+  .flexContentEnd {
+    margin-bottom: 2rem;
+  }
+}
