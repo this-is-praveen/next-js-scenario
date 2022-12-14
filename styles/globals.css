@@ -9,6 +9,10 @@ body {
   background-size: cover;
 }
 
+.blurBy4px {
+  filter: blur(4px);
+}
+
 a {
   color: inherit;
   text-decoration: none;

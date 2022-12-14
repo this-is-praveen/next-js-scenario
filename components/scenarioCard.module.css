@@ -142,3 +142,21 @@ button.explore:active::before {
   box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
   transform: translateY(-2px);
 }
+
+@media only screen and (max-width: 768px) {
+  .card {
+    width: 95%;
+  }
+  .explore_div {
+    margin-bottom: 0.25rem;
+  }
+  button.explore {
+    font-size: 0.75rem;
+    padding: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  button.explore::before {
+    box-shadow: 0 0 0 1px #80665b;
+  }
+}

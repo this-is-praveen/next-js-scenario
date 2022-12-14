@@ -15,7 +15,19 @@ const Layout = ({ children }: { children: ReactNode }) => {
 const NavBar = () => {
   const [click, setClick] = React.useState(false);
 
-  const handleClick = () => setClick(!click);
+  const handleClick = () => {
+    setClick(!click);
+    const layoutElement = document.body.querySelector(
+      "section[class^='layout_app']"
+    );
+    if (!layoutElement) return;
+    const layoutClasses = layoutElement.classList;
+    if (!click) {
+      layoutClasses.add("blurBy4px");
+    } else {
+      layoutClasses.remove("blurBy4px");
+    }
+  };
   const Close = () => setClick(false);
 
   return (
@@ -61,7 +73,7 @@ const NavBar = () => {
 };
 
 const HamburgerIcon = () => (
-  <svg viewBox="0 0 100 80" width="20" height="20">
+  <svg viewBox="0 0 100 80" width="20" height="20" fill="#fff">
     <rect width="100" height="10" color="white" />
     <rect y="30" width="100" height="10" color="white" />
     <rect y="60" width="100" height="10" color="white" />
