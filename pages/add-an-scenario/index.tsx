@@ -7,6 +7,8 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
 import classes from "./add-an-scenario.module.css";
+import btnClass from "../../components/scenarioCard.module.css";
+import { Loader } from "../../common/functions";
 
 type ValueType = {
   title: string;
@@ -108,6 +110,10 @@ const AddAnScenario = (props: any) => {
             </div>
           );
 
+          if (isSubmitting) {
+            return <Loader />;
+          }
+
           return (
             <Form onSubmit={handleSubmit}>
               {InputField({ for: "title" })}
@@ -116,7 +122,7 @@ const AddAnScenario = (props: any) => {
               {InputField({ for: "description" })}
               <div className={classes["flexContentEnd"]}>
                 <button
-                  className={classes["submitButton"]}
+                  className={btnClass["button_style"]}
                   disabled={isSubmitting}
                   type="submit"
                 >

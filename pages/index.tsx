@@ -1,11 +1,12 @@
 import { GetStaticProps } from "next";
 import CONNECT_MONGO from "../components/mongo";
 import ScenarioCard from "../components/scenarioCard";
+import classes from "../components/scenarioCard.module.css";
 
 const HomePage = (props: any) => {
   const { sceanarios = [] } = props;
   return (
-    <>
+    <div className={classes["card_wrapper"]}>
       {sceanarios.map((scenario: any) => (
         <ScenarioCard
           key={scenario._id}
@@ -15,7 +16,7 @@ const HomePage = (props: any) => {
           imageSrc={scenario.imageSrc}
         />
       ))}
-    </>
+    </div>
   );
 };
 

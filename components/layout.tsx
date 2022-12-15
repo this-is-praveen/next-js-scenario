@@ -1,13 +1,18 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 import { Fragment, ReactNode } from "react";
+import { PaperBackground } from "../common/functions";
 import classes from "./layout.module.css";
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <Fragment>
-      <NavBar />
-      <section className={classes["app"]}>{children}</section>
+      <main className={classes["app"]}>
+        <PaperBackground />
+        <NavBar />
+        <section className="main_section">{children}</section>
+      </main>
     </Fragment>
   );
 };
@@ -17,11 +22,11 @@ const NavBar = () => {
 
   const handleClick = () => {
     setClick(!click);
-    const layoutElement = document.body.querySelector(
-      "section[class^='layout_app']"
+    const mainElement = document.body.querySelector(
+      "section[class^='main_section']"
     );
-    if (!layoutElement) return;
-    const layoutClasses = layoutElement.classList;
+    if (!mainElement) return;
+    const layoutClasses = mainElement.classList;
     if (!click) {
       layoutClasses.add("blurBy4px");
     } else {
@@ -29,14 +34,27 @@ const NavBar = () => {
     }
   };
   const Close = () => setClick(false);
+  const { pathname } = useRouter();
+  const hyperLinks = {
+    home: "/",
+    addAnScenario: "/add-an-scenario",
+  };
+  const linkClassName = (path: string) => {
+    const isActive = path === pathname;
+    return `${classes["nav-links"]}${isActive ? ` ${classes["mark"]}` : ""}`;
+  };
 
   return (
     <header>
       <nav className={classes["navbar"]} onClick={(e) => e.stopPropagation()}>
         <div className={classes["nav-container"]}>
-          <Link href="/" className={classes["nav-logo"]}>
-            Scenario Dashboard
-          </Link>
+          {click ? (
+            <div className={classes["nav-logo"]}>Scenario Dashboard</div>
+          ) : (
+            <Link href={"/"} className={classes["nav-logo"]}>
+              Scenario Dashboard
+            </Link>
+          )}
           <ul
             className={
               click
@@ -46,8 +64,8 @@ const NavBar = () => {
           >
             <li className={classes["nav-item"]}>
               <Link
-                href="/"
-                className={classes["nav-links"]}
+                href={hyperLinks.home}
+                className={linkClassName(hyperLinks.home)}
                 onClick={click ? handleClick : undefined}
               >
                 Home
@@ -55,8 +73,8 @@ const NavBar = () => {
             </li>
             <li className={classes["nav-item"]}>
               <Link
-                href="/add-an-scenario"
-                className={classes["nav-links"]}
+                href={hyperLinks.addAnScenario}
+                className={linkClassName(hyperLinks.addAnScenario)}
                 onClick={click ? handleClick : undefined}
               >
                 Add a Scenario

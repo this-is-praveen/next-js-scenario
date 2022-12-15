@@ -1,4 +1,25 @@
+import { Fragment } from "react";
 import classes from "./common.module.css";
+
+const PaperBackground = () => {
+  return (
+    <Fragment>
+      <div className="parchment" />
+      <svg className="d_none">
+        <filter id="wavy2">
+          <feTurbulence
+            x="0"
+            y="0"
+            baseFrequency="0.02"
+            numOctaves="5"
+            seed="1"
+          />
+          <feDisplacementMap in="SourceGraphic" scale="20" />
+        </filter>
+      </svg>
+    </Fragment>
+  );
+};
 
 const Loader = () => {
   return (
@@ -14,4 +35,4 @@ const Loader = () => {
   );
 };
 
-export { Loader };
+export { Loader, PaperBackground };

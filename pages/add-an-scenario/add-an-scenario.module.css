@@ -2,13 +2,12 @@
   display: inline-block;
   box-sizing: content-box;
   padding: 10px 20px;
-  border: 1px solid #b7b7b7;
-  border-radius: 3px;
   text-overflow: clip;
-  box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.2) inset;
   transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
   width: 20rem;
   margin-right: 5rem;
+  outline: none;
+  mix-blend-mode: color-burn;
 }
 
 .inputLabel {
@@ -64,7 +63,7 @@
 @media only screen and (max-width: 768px) {
   .formWrapper {
     flex-direction: column;
-    margin: 2rem auto;
+    margin: 2rem 0.5rem;
   }
   .formWrapper form {
     width: 100%;
