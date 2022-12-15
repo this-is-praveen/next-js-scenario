@@ -9,6 +9,8 @@ import * as Yup from "yup";
 import classes from "./add-an-scenario.module.css";
 import btnClass from "../../components/scenarioCard.module.css";
 import { Loader } from "../../common/functions";
+import Head from "next/head";
+import { Fragment } from "react";
 
 type ValueType = {
   title: string;
@@ -110,12 +112,25 @@ const AddAnScenario = (props: any) => {
             </div>
           );
 
+          const Helmet = (
+            <Head>
+              <title>Add an Scenario</title>
+              <meta name="description" content="Add any content to the page" />
+            </Head>
+          );
+
           if (isSubmitting) {
-            return <Loader />;
+            return (
+              <Fragment>
+                {Helmet}
+                <Loader />
+              </Fragment>
+            );
           }
 
           return (
             <Form onSubmit={handleSubmit}>
+              {Helmet}
               {InputField({ for: "title" })}
               {InputField({ for: "imageSrc" })}
               {InputField({ for: "caption" })}

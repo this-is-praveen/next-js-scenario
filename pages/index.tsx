@@ -1,4 +1,5 @@
 import { GetStaticProps } from "next";
+import Head from "next/head";
 import CONNECT_MONGO from "../components/mongo";
 import ScenarioCard from "../components/scenarioCard";
 import classes from "../components/scenarioCard.module.css";
@@ -7,6 +8,10 @@ const HomePage = (props: any) => {
   const { sceanarios = [] } = props;
   return (
     <div className={classes["card_wrapper"]}>
+      <Head>
+        <title>Scenario Dashboard</title>
+        <meta name="description" content="This site was built with next_js" />
+      </Head>
       {sceanarios.map((scenario: any) => (
         <ScenarioCard
           key={scenario._id}

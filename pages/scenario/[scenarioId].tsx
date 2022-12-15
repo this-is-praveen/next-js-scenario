@@ -1,5 +1,6 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Loader } from "../../common/functions";
 import ScenarioCard, { IScenarioCard } from "../../components/scenarioCard";
 
@@ -24,11 +25,24 @@ const ScenarioDetailPage = () => {
     setLoading(true);
     callApi();
   }, [scenarioId]);
-
-  return !!response && !loading ? (
-    <ScenarioCard detailsPage={true} {...response} />
-  ) : (
-    <Loader />
+  const Helmet = (
+    <Head>
+      <title>{response?.title} Scenario</title>
+      <meta
+        name="description"
+        content={response?.description || "Loading..."}
+      />
+    </Head>
+  );
+  return (
+    <Fragment>
+      {Helmet}
+      {!!response && !loading ? (
+        <ScenarioCard detailsPage={true} {...response} />
+      ) : (
+        <Loader />
+      )}
+    </Fragment>
   );
 };
 
