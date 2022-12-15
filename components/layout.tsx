@@ -81,21 +81,10 @@ const NavBar = () => {
               </Link>
             </li>
           </ul>
-          <div className={classes["nav-icon"]} onClick={handleClick}>
-            <HamburgerIcon />
-          </div>
         </div>
       </nav>
     </header>
   );
 };
-
-const HamburgerIcon = () => (
-  <svg viewBox="0 0 100 80" width="20" height="20" fill="#fff">
-    <rect width="100" height="10" color="white" />
-    <rect y="30" width="100" height="10" color="white" />
-    <rect y="60" width="100" height="10" color="white" />
-  </svg>
-);
 
 export default Layout;
