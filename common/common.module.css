@@ -26,6 +26,15 @@
   }
 }
 
+.signature {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 2rem;
+  font-family: system-ui;
+}
+
 @media only screen and (max-width: 768px) {
   .loader span {
     font-size: 2rem;
