@@ -27,7 +27,7 @@ const ScenarioDetailPage = () => {
   }, [scenarioId]);
   const Helmet = (
     <Head>
-      <title>{response?.title} Scenario</title>
+      <title>{response?.title} Scenic</title>
       <meta
         name="description"
         content={response?.description || "Loading..."}

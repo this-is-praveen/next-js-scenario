@@ -9,7 +9,7 @@ const HomePage = (props: any) => {
   return (
     <div className={classes["card_wrapper"]}>
       <Head>
-        <title>Scenario Dashboard</title>
+        <title>Scenic</title>
         <meta name="description" content="This site was built with next_js" />
       </Head>
       {sceanarios.map((scenario: any) => (
