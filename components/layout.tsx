@@ -18,22 +18,6 @@ const Layout = ({ children }: { children: ReactNode }) => {
 };
 
 const NavBar = () => {
-  const [click, setClick] = React.useState(false);
-
-  const handleClick = () => {
-    setClick(!click);
-    const mainElement = document.body.querySelector(
-      "section[class^='main_section']"
-    );
-    if (!mainElement) return;
-    const layoutClasses = mainElement.classList;
-    if (!click) {
-      layoutClasses.add("blurBy4px");
-    } else {
-      layoutClasses.remove("blurBy4px");
-    }
-  };
-  const Close = () => setClick(false);
   const { pathname } = useRouter();
   const hyperLinks = {
     home: "/",
@@ -43,30 +27,20 @@ const NavBar = () => {
     const isActive = path === pathname;
     return `${classes["nav-links"]}${isActive ? ` ${classes["mark"]}` : ""}`;
   };
+  const Title = "Scenic";
 
   return (
     <header>
       <nav className={classes["navbar"]} onClick={(e) => e.stopPropagation()}>
         <div className={classes["nav-container"]}>
-          {click ? (
-            <div className={classes["nav-logo"]}>Scenario Dashboard</div>
-          ) : (
-            <Link href={"/"} className={classes["nav-logo"]}>
-              Scenario Dashboard
-            </Link>
-          )}
-          <ul
-            className={
-              click
-                ? `${classes["nav-menu"]} ${classes["active"]}`
-                : classes["nav-menu"]
-            }
-          >
+          <Link href={"/"} className={classes["nav-logo"]}>
+            {Title}
+          </Link>
+          <ul className={classes["nav-menu"]}>
             <li className={classes["nav-item"]}>
               <Link
                 href={hyperLinks.home}
                 className={linkClassName(hyperLinks.home)}
-                onClick={click ? handleClick : undefined}
               >
                 Home
               </Link>
@@ -75,7 +49,6 @@ const NavBar = () => {
               <Link
                 href={hyperLinks.addAnScenario}
                 className={linkClassName(hyperLinks.addAnScenario)}
-                onClick={click ? handleClick : undefined}
               >
                 Add a Scenario
               </Link>

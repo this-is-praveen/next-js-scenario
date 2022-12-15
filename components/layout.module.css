@@ -11,7 +11,13 @@
   position: relative;
 }
 
+.nav-container {
+  width: 90%;
+}
+
 .nav-logo {
+  width: 100%;
+  text-align: center;
   cursor: pointer;
   text-decoration: none;
   font-size: 2rem;
