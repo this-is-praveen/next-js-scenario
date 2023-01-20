@@ -65,3 +65,10 @@ a {
 .mw100 {
   max-width: 100%;
 }
+
+.editIcon {
+  transition: all 0.2s ease-in-out;
+}
+.editIcon:hover {
+  transform: scale(1.1);
+}

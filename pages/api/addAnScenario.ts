@@ -14,7 +14,7 @@ const handler = async (req: any, res: any) => {
     const result = await scenarioCollection.insertOne(payload);
     closeDB();
 
-    res.status(201).json({ message: "Inseted" });
+    res.status(201).json({ message: "Inserted" });
   }
 };
 

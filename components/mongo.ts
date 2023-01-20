@@ -14,10 +14,10 @@ const CONNECT_MONGO = async () => {
   try {
     const clientPromise = client.connect();
     const clientResponse = await clientPromise;
-    const cliendDB = clientResponse.db("NextJS_scenario");
-    const scenarioCollection = cliendDB.collection("scenario");
+    const clientDB = clientResponse.db("NextJS_scenario");
+    const scenarioCollection = clientDB.collection("scenario");
 
-    return { scenarioCollection, closeDB: () => client.close() };
+    return { clientDB, scenarioCollection, closeDB: () => client.close() };
   } catch (error) {
     console.log("------------------------------------------------");
     console.error("Fail connection to Mongo >> ", error);

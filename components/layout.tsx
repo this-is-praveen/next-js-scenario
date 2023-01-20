@@ -21,7 +21,7 @@ const NavBar = () => {
   const { pathname } = useRouter();
   const hyperLinks = {
     home: "/",
-    addAnScenario: "/add-an-scenario",
+    addAnScenario: "/addAnScenario",
   };
   const linkClassName = (path: string) => {
     const isActive = path === pathname;

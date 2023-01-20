@@ -3,9 +3,11 @@ import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
 import { Loader } from "../../common/functions";
 import ScenarioCard, { IScenarioCard } from "../../components/scenarioCard";
+import { useAppContext } from "../_app";
 
 const ScenarioDetailPage = () => {
   const router = useRouter();
+
   const scenarioId = router.query.scenarioId;
   const [response, setResponse] = useState<IScenarioCard>();
   const [loading, setLoading] = useState(false);

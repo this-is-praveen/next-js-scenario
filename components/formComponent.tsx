@@ -6,13 +6,14 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
-import classes from "./add-an-scenario.module.css";
-import btnClass from "../../components/scenarioCard.module.css";
-import { Loader } from "../../common/functions";
+import classes from "./formComponent.module.css";
+import btnClass from "../components/scenarioCard.module.css";
+import { Loader } from "../common/functions";
 import Head from "next/head";
 import { Fragment } from "react";
 
 type ValueType = {
+  id: string;
   title: string;
   imageSrc: string;
   caption: string;
@@ -21,6 +22,7 @@ type ValueType = {
 type ValueKeys = keyof ValueType;
 
 const fieldName = {
+  id: "Id",
   title: "Title",
   imageSrc: "Image Source",
   caption: "Caption",
@@ -30,7 +32,12 @@ const fieldName = {
 const webUrlRegex =
   /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/;
 
-const AddAnScenario = (props: any) => {
+const FormComponent = (props: any) => {
+  const { type = "", data = {} } = props || {};
+  const isEdit = type === "edit";
+
+  console.log("props", props);
+
   const router = useRouter();
 
   const schema = Yup.object().shape({
@@ -54,15 +61,21 @@ const AddAnScenario = (props: any) => {
   const onSubmit = async (values: ValueType, formikProps: any) => {
     const { setSubmitting, resetForm } = formikProps;
     setSubmitting(true);
-    const response = await fetch("/api/addAnScenario", {
-      method: "POST",
-      body: JSON.stringify(values),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+
+    const response = await fetch(
+      `/api/${isEdit ? "editAnScenario" : "addAnScenario"}`,
+      {
+        method: isEdit ? "PUT" : "POST",
+        body: JSON.stringify(values),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     if (response.status === 201) {
       router.push("/");
+    } else if (response.status === 204) {
+      router.back();
     }
     setSubmitting(false);
   };
@@ -72,10 +85,11 @@ const AddAnScenario = (props: any) => {
         validationSchema={schema}
         onSubmit={onSubmit}
         initialValues={{
-          title: "",
-          imageSrc: "",
-          caption: "",
-          description: "",
+          id: data?._id || "",
+          title: data?.title || "",
+          imageSrc: data?.imageSrc || "",
+          caption: data?.caption || "",
+          description: data?.description || "",
         }}
       >
         {(formikProps) => {
@@ -103,6 +117,7 @@ const AddAnScenario = (props: any) => {
                 value={values[field]}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                disabled={field === "id"}
                 isInvalid={!!errors[field]}
                 isValid={touched[field] && !errors[field]}
               />
@@ -131,6 +146,7 @@ const AddAnScenario = (props: any) => {
           return (
             <Form onSubmit={handleSubmit}>
               {Helmet}
+              {isEdit && InputField({ for: "id" })}
               {InputField({ for: "title" })}
               {InputField({ for: "imageSrc" })}
               {InputField({ for: "caption" })}
@@ -139,9 +155,19 @@ const AddAnScenario = (props: any) => {
                 <button
                   className={btnClass["button_style"]}
                   disabled={isSubmitting}
+                  onClick={() => router.back()}
+                  style={{ marginRight: "1rem" }}
+                >
+                  {`⇐ Go Back`}
+                </button>
+                <button
+                  className={btnClass["button_style"]}
+                  disabled={isSubmitting}
                   type="submit"
                 >
-                  {isSubmitting ? "Loading..." : `Submit${isValid ? " ✔" : ""}`}
+                  {isSubmitting
+                    ? "Loading..."
+                    : `${isEdit ? "Update" : "Submit"} ${isValid ? "✔" : ""}`}
                 </button>
               </div>
             </Form>
@@ -152,4 +178,4 @@ const AddAnScenario = (props: any) => {
   );
 };
 
-export default AddAnScenario;
+export default FormComponent;
